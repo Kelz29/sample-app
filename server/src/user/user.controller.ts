@@ -4,7 +4,7 @@ import * as nestAccessControl from "nest-access-control";
 import { UserService } from "./user.service";
 import { UserControllerBase } from "./base/user.controller.base";
 
-@swagger.ApiBasicAuth()
+@swagger.ApiBearerAuth()
 @swagger.ApiTags("users")
 @common.Controller("users")
 export class UserController extends UserControllerBase {

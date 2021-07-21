@@ -1,14 +1,13 @@
 import * as common from "@nestjs/common";
 import * as graphql from "@nestjs/graphql";
 import * as nestAccessControl from "nest-access-control";
-import * as gqlBasicAuthGuard from "../auth/gqlBasicAuth.guard";
-import * as gqlACGuard from "../auth/gqlAC.guard";
+import * as gqlJwtAuthGuard from "../auth/jwt-guard/gqlJwtAuth.guard";
 import { AddressResolverBase } from "./base/address.resolver.base";
 import { Address } from "./base/Address";
 import { AddressService } from "./address.service";
 
 @graphql.Resolver(() => Address)
-@common.UseGuards(gqlBasicAuthGuard.GqlBasicAuthGuard, gqlACGuard.GqlACGuard)
+@common.UseGuards(gqlJwtAuthGuard.GqlJwtAuthGuard, nestAccessControl.ACGuard)
 export class AddressResolver extends AddressResolverBase {
   constructor(
     protected readonly service: AddressService,

@@ -2,7 +2,7 @@ import * as common from "@nestjs/common";
 import * as graphql from "@nestjs/graphql";
 import * as apollo from "apollo-server-express";
 import * as nestAccessControl from "nest-access-control";
-import * as gqlBasicAuthGuard from "../../auth/gqlBasicAuth.guard";
+import * as gqlJwtAuthGuard from "../../auth/jwt-guard/gqlJwtAuth.guard";
 import * as gqlACGuard from "../../auth/gqlAC.guard";
 import * as gqlUserRoles from "../../auth/gqlUserRoles.decorator";
 import * as abacUtil from "../../auth/abac.util";
@@ -19,7 +19,7 @@ import { Product } from "../../product/base/Product";
 import { OrderService } from "../order.service";
 
 @graphql.Resolver(() => Order)
-@common.UseGuards(gqlBasicAuthGuard.GqlBasicAuthGuard, gqlACGuard.GqlACGuard)
+@common.UseGuards(gqlJwtAuthGuard.GqlJwtAuthGuard, gqlACGuard.GqlACGuard)
 export class OrderResolverBase {
   constructor(
     protected readonly service: OrderService,

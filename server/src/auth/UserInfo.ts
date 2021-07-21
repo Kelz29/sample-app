@@ -6,7 +6,9 @@ import { User } from "../user/user";
 @ObjectType()
 export class UserInfo implements Partial<User> {
   @Field(() => String)
-  username!: string;
+  username?: string;
   @Field(() => [String])
-  roles!: string[];
+  roles?: string[];
+  @Field(() => String)
+  accessToken?: string;
 }

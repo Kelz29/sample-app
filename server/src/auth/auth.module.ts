@@ -8,10 +8,25 @@ import { AuthResolver } from "./auth.resolver";
 import { AuthService } from "./auth.service";
 import { BasicStrategy } from "./basic.strategy";
 import { PasswordService } from "./password.service";
-
+import { JwtModule } from "@nestjs/jwt";
+import { jwtConstants } from "../auth/jwt-guard/constants";
+import { JwtStrategy } from "../auth/jwt-guard/jwt.strategy";
 @Module({
-  imports: [forwardRef(() => UserModule), PassportModule],
-  providers: [AuthService, BasicStrategy, PasswordService, AuthResolver],
+  imports: [
+    forwardRef(() => UserModule),
+    PassportModule,
+    JwtModule.register({
+      secret: jwtConstants.secret, //secret can always be changed to any word of choice
+      signOptions: { expiresIn: "2d" }, //Bearer token valid for two days
+    }),
+  ],
+  providers: [
+    AuthService,
+    BasicStrategy,
+    JwtStrategy,
+    PasswordService,
+    AuthResolver,
+  ],
   controllers: [AuthController],
   exports: [AuthService, PasswordService],
 })

@@ -4,7 +4,7 @@ import * as nestAccessControl from "nest-access-control";
 import { AddressService } from "./address.service";
 import { AddressControllerBase } from "./base/address.controller.base";
 
-@swagger.ApiBasicAuth()
+@swagger.ApiBearerAuth()
 @swagger.ApiTags("addresses")
 @common.Controller("addresses")
 export class AddressController extends AddressControllerBase {

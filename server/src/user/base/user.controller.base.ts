@@ -2,7 +2,7 @@ import * as common from "@nestjs/common";
 import * as swagger from "@nestjs/swagger";
 import * as nestMorgan from "nest-morgan";
 import * as nestAccessControl from "nest-access-control";
-import * as basicAuthGuard from "../../auth/basicAuth.guard";
+import * as gqlJwtAuthGuard from "../../auth/jwt-guard/gqlJwtAuth.guard";
 import * as abacUtil from "../../auth/abac.util";
 import { isRecordNotFoundError } from "../../prisma.util";
 import * as errors from "../../errors";
@@ -23,7 +23,7 @@ export class UserControllerBase {
   ) {}
 
   @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(basicAuthGuard.BasicAuthGuard, nestAccessControl.ACGuard)
+  @common.UseGuards(gqlJwtAuthGuard.GqlJwtAuthGuard, nestAccessControl.ACGuard)
   @common.Post()
   @nestAccessControl.UseRoles({
     resource: "User",
@@ -69,7 +69,7 @@ export class UserControllerBase {
   }
 
   @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(basicAuthGuard.BasicAuthGuard, nestAccessControl.ACGuard)
+  @common.UseGuards(gqlJwtAuthGuard.GqlJwtAuthGuard, nestAccessControl.ACGuard)
   @common.Get()
   @nestAccessControl.UseRoles({
     resource: "User",
@@ -111,7 +111,7 @@ export class UserControllerBase {
   }
 
   @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(basicAuthGuard.BasicAuthGuard, nestAccessControl.ACGuard)
+  @common.UseGuards(gqlJwtAuthGuard.GqlJwtAuthGuard, nestAccessControl.ACGuard)
   @common.Get("/:id")
   @nestAccessControl.UseRoles({
     resource: "User",
@@ -152,7 +152,7 @@ export class UserControllerBase {
   }
 
   @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(basicAuthGuard.BasicAuthGuard, nestAccessControl.ACGuard)
+  @common.UseGuards(gqlJwtAuthGuard.GqlJwtAuthGuard, nestAccessControl.ACGuard)
   @common.Patch("/:id")
   @nestAccessControl.UseRoles({
     resource: "User",
@@ -211,7 +211,7 @@ export class UserControllerBase {
   }
 
   @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(basicAuthGuard.BasicAuthGuard, nestAccessControl.ACGuard)
+  @common.UseGuards(gqlJwtAuthGuard.GqlJwtAuthGuard, nestAccessControl.ACGuard)
   @common.Delete("/:id")
   @nestAccessControl.UseRoles({
     resource: "User",

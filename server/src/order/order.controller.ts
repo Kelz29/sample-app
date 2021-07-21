@@ -4,7 +4,7 @@ import * as nestAccessControl from "nest-access-control";
 import { OrderService } from "./order.service";
 import { OrderControllerBase } from "./base/order.controller.base";
 
-@swagger.ApiBasicAuth()
+@swagger.ApiBearerAuth()
 @swagger.ApiTags("orders")
 @common.Controller("orders")
 export class OrderController extends OrderControllerBase {
